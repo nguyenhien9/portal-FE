@@ -8,6 +8,8 @@ import {
   HomeOutlined,
   CustomerServiceOutlined,
   DollarCircleOutlined,
+  AreaChartOutlined,
+  AccountBookOutlined,
 } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
@@ -29,6 +31,9 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
+  // Xác định key được chọn dựa trên đường dẫn hiện tại
+  const selectedKey = location.pathname.split("/")[1] || "dashboard";
+
   // Tạo breadcrumbs dựa trên route hiện tại
   const breadcrumbItems = location.pathname
     .split("/")
@@ -44,23 +49,20 @@ const MainLayout = () => {
       };
     });
 
+  const menuItems = [
+    { key: "dashboard", icon: <AreaChartOutlined />, label: <Link to="/dashboard">Dashboard</Link> },
+    { key: "booking", icon: <AccountBookOutlined />, label: <Link to="/booking">Booking</Link> },
+    { key: "customer", icon: <DollarCircleOutlined />, label: <Link to="/customer">Customer</Link> },
+    { key: "user", icon: <UserOutlined />, label: <Link to="/user">User</Link> },
+    { key: "service", icon: <CustomerServiceOutlined />, label: <Link to="/service">Service</Link> }
+  ]
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" style={{ height: "10vh" }} />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" icon={<HomeOutlined />}>
-            <Link to="/home">Home</Link>
-          </Menu.Item>
-          <Menu.Item key="2" icon={<DollarCircleOutlined />}>
-            <Link to="/customer">Customer</Link>
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UserOutlined />}>
-            <Link to="/user">User</Link>
-          </Menu.Item>
-          <Menu.Item key="4" icon={<CustomerServiceOutlined />}>
-            <Link to="/service">Service</Link>
-          </Menu.Item>
+        <Menu theme="dark" mode="inline" selectedKeys={[selectedKey]} items={menuItems}>
+
         </Menu>
       </Sider>
       <Layout>
@@ -81,7 +83,7 @@ const MainLayout = () => {
           />
           <Breadcrumb>
             <Breadcrumb.Item key="home">
-              <Link to="/home">
+              <Link to="/dashboard"> {/* Chuyển sang /dashboard khi nhấn vào Home */}
                 <HomeOutlined />
               </Link>
             </Breadcrumb.Item>
