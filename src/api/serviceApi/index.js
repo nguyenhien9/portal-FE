@@ -3,6 +3,7 @@ import {
   FETCH_SERVICES_BEGIN,
   FETCH_SERVICES_SUCCESS,
   FETCH_SERVICES_ERROR,
+  CREATE_SERVICES,
 } from "../../stores/action";
 
 export const getAllServices = async (dispatch) => {
@@ -22,5 +23,15 @@ export const getAllServices = async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: FETCH_SERVICES_ERROR, payload: error.message });
+  }
+};
+export const createService = async (dispatch, formData) => {
+  try {
+    const res = await axiosInstance.post("/service", formData);
+    if (res.status === 201) {
+      dispatch({ type: CREATE_SERVICES, payload: res.formData });
+    }
+  } catch (error) {
+    console.error("Failed to create service:", error);
   }
 };

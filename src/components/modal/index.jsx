@@ -1,32 +1,38 @@
-import React, { useState } from 'react'
-import { Button, Modal } from 'antd'
-const CustomModal = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+import { Button, Modal } from "antd";
+import CustomButton from "../button";
 
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-    return (
-        <>
-            <Button type="primary" onClick={showModal}>
-                Open Modal
-            </Button>
-            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
-        </>
-    );
-}
+const CustomModal = ({
+  title,
+  open,
+  onOk,
+  onCancel,
+  onReset,
+  onSubmit,
+  children,
+}) => {
+  return (
+    <Modal
+      title={title}
+      open={open}
+      onOk={onOk}
+      onCancel={onCancel}
+      footer={
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "end",
+            gap: "5px",
+          }}
+        >
+          <CustomButton text="Reset" danger onClick={onReset} />
+          <CustomButton text="Create" type="" onClick={onReset} />
+        </div>
+      }
+    >
+      {children}
+    </Modal>
+  );
+};
 
 export default CustomModal;

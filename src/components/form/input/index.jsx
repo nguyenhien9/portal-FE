@@ -1,9 +1,23 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
 
-const CustomInput = () => {
-    return (
-        <div>index</div>
-    )
-}
+import { Input } from "antd";
+const CustomInput = ({
+  type = "text",
 
-export default CustomInput
+  value,
+  onChange,
+  status,
+  ...others
+}) => {
+  return (
+    <Input
+      type={type}
+      value={value}
+      onChange={onChange}
+      status={status}
+      {...others}
+    />
+  );
+};
+
+export default CustomInput;
