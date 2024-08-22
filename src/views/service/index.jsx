@@ -1,23 +1,37 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
+import { Space, Typography, Form } from "antd";
 
 import {
   CustomTable,
   CustomButton,
   CustomModal,
   Toolbar,
-  ServiceForm,
+  CustomForm
 } from "../../components";
 import { useServiceContext, useModalContext } from "../../contexts";
-import { getAllServices } from "../../api/serviceApi";
-import { useEffect } from "react";
-import { Space, Typography } from "antd";
+import { getAllServices, createService } from "../../api/serviceApi";
+import { serviceFormConfig } from "../../constants/formConfig"
 
 const Service = () => {
-  const { dispatch, services, page, totalPages, isLoading } =
-    useServiceContext();
+
+  const { dispatch, services, page, isLoading, totalPages } = useServiceContext();
+  const [form] = Form.useForm();
+
+  const handleFinish = async (values) => {
+    await createService(dispatch, values)
+    form.resetFields();
+
+  }
+  const handleResetForm = () => {
+    form.resetFields()
+  }
+
   useEffect(() => {
     getAllServices(dispatch);
-  }, [dispatch]);
+  }, [dispatch, page]);
+
+
   const { openModal, isModalOpen, closeModal } = useModalContext();
   const columns = [
     { title: "No", dataIndex: "id", key: "id" },
@@ -35,6 +49,9 @@ const Service = () => {
     },
   ];
 
+  const dataSources = services?.map((service) => ({ ...service, key: service.id }));
+
+
   return (
     <div>
       <Toolbar
@@ -49,7 +66,7 @@ const Service = () => {
         ]}
       />
       <div>
-        <CustomTable dataSources={services} columns={columns} />
+        <CustomTable dataSources={dataSources} columns={columns} pagination={[{ page: totalPages }]} loading={isLoading} />
       </div>
       <div>
         {isModalOpen && (
@@ -60,10 +77,9 @@ const Service = () => {
               </Typography.Title>
             }
             open={isModalOpen}
-            onOk={() => console.log(isModalOpen)}
-            onCancel={() => closeModal()}
+            onClose={() => closeModal()}
           >
-            <ServiceForm />
+            <CustomForm form={form} formConfig={serviceFormConfig} onFinish={handleFinish} onReset={handleResetForm} />
           </CustomModal>
         )}
       </div>

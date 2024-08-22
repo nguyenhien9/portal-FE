@@ -1,7 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { useContext, createContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import reducer from "../stores/serviceReducer";
+
 
 const initialState = {
   services: [],
@@ -24,6 +24,8 @@ export const ServiceProvider = ({ children }) => {
     </ServiceContext.Provider>
   );
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
 export const useServiceContext = () => {
-  return useContext(ServiceContext);
+  return React.useContext(ServiceContext);
 };

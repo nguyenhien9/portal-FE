@@ -10,28 +10,23 @@ export const getAllServices = async (dispatch) => {
   try {
     dispatch({ type: FETCH_SERVICES_BEGIN });
     const res = await axiosInstance.get("/service");
-    const { results, totalPages, totalServices, limit, page } = res.data;
+    console.log(res.data)
     dispatch({
       type: FETCH_SERVICES_SUCCESS,
-      payload: {
-        results, // Danh sách dịch vụ
-        totalPages,
-        totalServices,
-        limit,
-        page,
-      },
+      payload: res.data
     });
+
   } catch (error) {
     dispatch({ type: FETCH_SERVICES_ERROR, payload: error.message });
+    console.log("error", error.message)
   }
 };
 export const createService = async (dispatch, formData) => {
   try {
     const res = await axiosInstance.post("/service", formData);
-    if (res.status === 201) {
-      dispatch({ type: CREATE_SERVICES, payload: res.formData });
-    }
+    const newService = res.data.data;
+    dispatch({ type: CREATE_SERVICES, payload: newService });
   } catch (error) {
-    console.error("Failed to create service:", error);
+    console.log("Failed to create service:", error);
   }
 };

@@ -1,9 +1,9 @@
-import React from 'react'
+
 import { Button } from 'antd'
 
-const CustomButton = ({ type, text, ...rest }) => {
+const CustomButton = ({ type, text, ...others }) => {
     return (
-        <Button type={type} {...rest} >{text}</Button>
+        <Button type={type} {...others}>{text}</Button>
     )
 }
 

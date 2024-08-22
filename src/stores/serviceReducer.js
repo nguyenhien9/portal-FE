@@ -18,7 +18,7 @@ const serviceReducer = (state, action) => {
     case FETCH_SERVICES_SUCCESS:
       return {
         ...state,
-        services: action.payload.results,
+        services: action.payload.services,
         totalPages: action.payload.totalPages,
         totalServices: action.payload.totalServices,
         limit: action.payload.limit,

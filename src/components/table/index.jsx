@@ -12,11 +12,12 @@ const CustomTable = ({
 }) => {
   return (
     <Table
-      {...others}
       columns={columns}
       dataSource={dataSources}
       pagination={pagination}
       loading={loading}
+      {...others}
+
     />
   );
 };
