@@ -6,18 +6,23 @@ const CustomTable = ({
   dataSources,
   loading,
   pagination,
-  onUpdate,
-  onDelete,
+  onTableChange,
   ...others
 }) => {
+  const updateDataSources = dataSources?.map((item, i) => ({
+    ...item,
+    no: i + 1,
+  }));
   return (
     <Table
+      size="small"
+      tableLayout="fixed"
       columns={columns}
-      dataSource={dataSources}
+      dataSource={updateDataSources}
       pagination={pagination}
       loading={loading}
+      onChange={onTableChange}
       {...others}
-
     />
   );
 };

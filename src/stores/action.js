@@ -10,5 +10,7 @@ export const FETCH_STAFF_BEGIN = "FETCH_STAFF_BEGIN";
 export const FETCH_STAFF_SUCCESS = "FETCH_STAFF_SUCCCESS";
 export const FETCH_STAFF_ERROR = "FETCH_STAFF_ERROR";
 
+export const CHANGE_PAGE = "CHANGE_PAGE";
+
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";

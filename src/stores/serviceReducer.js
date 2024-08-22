@@ -5,6 +5,7 @@ import {
   CREATE_SERVICES,
   UPDATE_SERVICES,
   DELETE_SERVICES,
+  CHANGE_PAGE,
 } from "./action";
 
 const serviceReducer = (state, action) => {
@@ -18,7 +19,7 @@ const serviceReducer = (state, action) => {
     case FETCH_SERVICES_SUCCESS:
       return {
         ...state,
-        services: action.payload.services,
+        services: action.payload.results,
         totalPages: action.payload.totalPages,
         totalServices: action.payload.totalServices,
         limit: action.payload.limit,
@@ -52,6 +53,11 @@ const serviceReducer = (state, action) => {
         services: state.services.filter(
           (service) => service.id !== action.payload.id
         ),
+      };
+    case CHANGE_PAGE:
+      return {
+        ...state,
+        page: action.payload,
       };
     default:
       return state;
