@@ -1,4 +1,4 @@
 import { ServiceProvider, useServiceContext } from "./serviceSlice";
 import { ModalProvider, useModalContext } from "./modalSlice";
-
-export { ServiceProvider, useServiceContext, ModalProvider, useModalContext };
+import { CfModalProvider, useCfModalContext } from "./cfModalSlice"
+export { ServiceProvider, useServiceContext, ModalProvider, useModalContext, CfModalProvider, useCfModalContext };

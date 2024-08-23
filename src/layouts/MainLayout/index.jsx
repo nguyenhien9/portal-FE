@@ -48,9 +48,9 @@ const MainLayout = () => {
       label: <Link to="/customer">Customer</Link>,
     },
     {
-      key: "user",
+      key: "staff",
       icon: <UserOutlined />,
-      label: <Link to="/user">User</Link>,
+      label: <Link to="/staff">Staff</Link>,
     },
     {
       key: "service",

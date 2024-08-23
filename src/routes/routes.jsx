@@ -4,7 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 
 const Dasboard = lazy(() => import("../views/dashboard"));
 const Customer = lazy(() => import("../views/customer"));
-const User = lazy(() => import("../views/user"));
+const Staff = lazy(() => import("../views/staff"));
 const Service = lazy(() => import("../views/service"));
 const Booking = lazy(() => import("../views/booking"))
 const routes = [
@@ -15,7 +15,7 @@ const routes = [
       { path: "", element: <Dasboard /> },
       { path: "booking", element: <Booking /> },
       { path: "customer", element: <Customer /> },
-      { path: "user", element: <User /> },
+      { path: "staff", element: <Staff /> },
       { path: "service", element: <Service /> },
       { path: "*", element: <Navigate to="/" /> },
     ],

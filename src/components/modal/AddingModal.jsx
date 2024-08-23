@@ -1,7 +1,7 @@
-import { Button, Modal } from "antd";
-import CustomButton from "../button";
+import { Modal } from "antd";
 
-const CustomModal = ({
+
+const AddingModal = ({
   title,
   open,
   onClose,
@@ -20,4 +20,4 @@ const CustomModal = ({
   );
 };
 
-export default CustomModal;
+export default AddingModal;

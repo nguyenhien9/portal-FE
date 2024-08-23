@@ -1,15 +1,16 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
-import { Space, Typography, Form, Skeleton, Popconfirm } from "antd";
+import { Space, Typography, Form } from "antd";
 
 import {
   CustomTable,
   CustomButton,
-  CustomModal,
   Toolbar,
   CustomForm,
+  AddingModal,
 } from "../../components";
-import { useServiceContext, useModalContext } from "../../contexts";
+import { useServiceContext, useModalContext, useCfModalContext } from "../../contexts";
+import { showConfirm } from "../../utils/showConfirm"
 import {
   getAllServices,
   createService,
@@ -34,16 +35,27 @@ const Service = () => {
     const { current } = pagination;
     getPage(dispatch, current);
   };
-  const handleDelete = async (id) => {
-    await deleteService(dispatch, id);
+  const handleDelete = async (id, service_name) => {
+    try {
+      await showConfirm({
+        title: "Delete service",
+        content: <p>Bạn có muốn xóa {service_name}?</p>,
+        onConfirm: async () => {
+          await deleteService(dispatch, id);
+        },
+      });
+    } catch (error) {
+      console.error('Delete action was canceled or failed:', error);
+      // Handle or display error message if needed
+    }
   };
   useEffect(() => {
     getAllServices(dispatch, page, limit);
   }, [dispatch, page, limit]);
 
+
   const { openModal, isModalOpen, closeModal } = useModalContext();
   const columns = [
-    { title: "No", dataIndex: "id", key: "id" },
     { title: "Service code", dataIndex: "service_code", key: "service_code" },
     { title: "Service Name", dataIndex: "service_name", key: "service_name" },
     {
@@ -52,19 +64,13 @@ const Service = () => {
       render: (_, record) => (
         <Space size="middle">
           <CustomButton type="text" text="Update" icon={<EditOutlined />} />
-          <Popconfirm
-            title="Are your sure?"
-            onConfirm={() => handleDelete(record.id)}
-            okText="OK"
-            cancelText="No"
-          >
-            <CustomButton
-              type="text"
-              text="Delete"
-              danger
-              icon={<DeleteOutlined />}
-            />
-          </Popconfirm>
+          <CustomButton
+            type="text"
+            text="Delete"
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record.id, record.service_name)}
+          />
         </Space>
       ),
     },
@@ -94,7 +100,7 @@ const Service = () => {
           columns={columns}
           loading={isLoading}
           pagination={{
-            page: page,
+            current: page,
             pageSize: limit,
             total: totalPages * limit,
             showSizeChanger: false,
@@ -104,7 +110,7 @@ const Service = () => {
       </div>
       <div>
         {isModalOpen && (
-          <CustomModal
+          <AddingModal
             title={
               <Typography.Title level={3} style={{ color: "#147afa" }}>
                 Add new service
@@ -119,9 +125,13 @@ const Service = () => {
               onFinish={handleFinish}
               onReset={handleResetForm}
             />
-          </CustomModal>
+          </AddingModal>
         )}
       </div>
+      <div>
+
+      </div>
+
     </div>
   );
 };

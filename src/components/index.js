@@ -1,7 +1,8 @@
 import CustomButton from "./button";
-import CustomModal from "./modal";
+import AddingModal from "./modal/AddingModal";
+import ConfirmModal from "./modal/ConfirmModal";
 import Toolbar from "./toolbar";
 import Loader from "./loader";
 import CustomTable from "./table";
 import CustomForm from "./form";
-export { CustomButton, CustomModal, Toolbar, Loader, CustomTable, CustomForm };
+export { CustomButton, AddingModal, ConfirmModal, Toolbar, Loader, CustomTable, CustomForm };
