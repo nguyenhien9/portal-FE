@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import { Space, Typography, Form } from "antd";
 
@@ -9,8 +9,8 @@ import {
   CustomForm,
   AddingModal,
 } from "../../components";
-import { useServiceContext, useModalContext, useCfModalContext } from "../../contexts";
-import { showConfirm } from "../../utils/showConfirm"
+import { useServiceContext, useModalContext } from "../../contexts";
+import { showConfirm } from "../../utils/showConfirm";
 import {
   getAllServices,
   createService,
@@ -20,24 +20,24 @@ import {
 import { serviceFormConfig } from "../../constants/formConfig";
 
 const Service = () => {
-  const { dispatch, services, page, limit, isLoading, totalPages } =
+  const { dispatch, services, page, limit, isLoading, totalServices } =
     useServiceContext();
 
   const [form] = Form.useForm();
-  const handleFinish = async (values) => {
-    await createService(dispatch, values);
+  const handleFinish = (values) => {
+    createService(dispatch, values);
     form.resetFields();
   };
   const handleResetForm = () => {
     form.resetFields();
   };
   const handleChangePage = (pagination) => {
-    const { current } = pagination;
-    getPage(dispatch, current);
+    const { current, pageSize } = pagination;
+    getPage(dispatch, current, pageSize);
   };
   const handleDelete = async (id, service_name) => {
     try {
-      await showConfirm({
+      showConfirm({
         title: "Delete service",
         content: <p>Bạn có muốn xóa {service_name}?</p>,
         onConfirm: async () => {
@@ -45,14 +45,13 @@ const Service = () => {
         },
       });
     } catch (error) {
-      console.error('Delete action was canceled or failed:', error);
+      console.error("Delete action was canceled or failed:", error);
       // Handle or display error message if needed
     }
   };
   useEffect(() => {
     getAllServices(dispatch, page, limit);
   }, [dispatch, page, limit]);
-
 
   const { openModal, isModalOpen, closeModal } = useModalContext();
   const columns = [
@@ -102,7 +101,7 @@ const Service = () => {
           pagination={{
             current: page,
             pageSize: limit,
-            total: totalPages * limit,
+            total: totalServices,
             showSizeChanger: false,
           }}
           onTableChange={handleChangePage}
@@ -128,10 +127,7 @@ const Service = () => {
           </AddingModal>
         )}
       </div>
-      <div>
-
-      </div>
-
+      <div></div>
     </div>
   );
 };

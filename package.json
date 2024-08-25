@@ -2,6 +2,7 @@
   "name": "portal",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:8080/api/v1",
   "type": "module",
   "scripts": {
     "dev": "vite",

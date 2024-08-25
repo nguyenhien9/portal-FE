@@ -9,7 +9,7 @@ import {
   DELETE_SERVICES,
 } from "../../stores/action";
 
-export const getAllServices = async (dispatch, page = 1, limit = 5) => {
+export const getAllServices = async (dispatch, page, limit) => {
   try {
     dispatch({ type: FETCH_SERVICES_BEGIN });
     const res = await axiosInstance.get("/service", {
@@ -18,6 +18,7 @@ export const getAllServices = async (dispatch, page = 1, limit = 5) => {
         limit,
       },
     });
+    console.log("res", res);
     dispatch({
       type: FETCH_SERVICES_SUCCESS,
       payload: res.data,
@@ -30,6 +31,7 @@ export const createService = async (dispatch, formData) => {
   try {
     const res = await axiosInstance.post("/service", formData);
     const newService = res.data.data;
+
     dispatch({ type: CREATE_SERVICES, payload: newService });
     successHandler("Service created successfully!");
   } catch (error) {
@@ -46,6 +48,6 @@ export const deleteService = async (dispatch, id) => {
   }
 };
 
-export const getPage = (dispatch, page) => {
-  dispatch({ type: CHANGE_PAGE, payload: page });
+export const getPage = (dispatch, pagination) => {
+  dispatch({ type: CHANGE_PAGE, payload: pagination });
 };
