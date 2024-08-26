@@ -18,7 +18,7 @@ export const getAllServices = async (dispatch, page, limit) => {
         limit,
       },
     });
-    console.log("res", res);
+
     dispatch({
       type: FETCH_SERVICES_SUCCESS,
       payload: res.data,

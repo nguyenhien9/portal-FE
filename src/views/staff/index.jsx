@@ -32,7 +32,6 @@ const Staff = () => {
   };
   const handleChangePage = (pagination) => {
     const { current, pageSize } = pagination;
-    console.log("current", current);
     if (pageSize !== limit) {
       getPage(dispatch, current, pageSize);
     } else {
