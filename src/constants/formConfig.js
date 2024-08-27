@@ -130,11 +130,7 @@ export const bookingFormConfig = [
       placeholder: "Select status",
     },
   },
-  {
-    label: "Notes",
-    name: "notes",
-    type: "textarea",
-  },
+
   {
     label: "Booking date",
     name: "booking_date",
@@ -144,5 +140,10 @@ export const bookingFormConfig = [
       placeholder: "Select booking date",
       format: "YYYY-MM-DD",
     },
+  },
+  {
+    label: "Notes",
+    name: "notes",
+    type: "textarea",
   },
 ];
