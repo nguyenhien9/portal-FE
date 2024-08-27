@@ -11,20 +11,20 @@ import {
 } from "../../components";
 import { useCustomerContext, useModalContext } from "../../contexts";
 import { showConfirm } from "../../utils/showConfirm";
-import { fetchCustomers } from "../../api/customerApi";
-import { staffFormConfig } from "../../constants/formConfig";
+import { fetchCustomers, createCustomer, deleteCustomer } from "../../api/customerApi";
+import { customerFormConfig } from "../../constants/formConfig";
 
-const Staff = () => {
+const Customer = () => {
   const { dispatch, customers, page, limit, isLoading, totalPages } =
     useCustomerContext();
-  // const [form] = Form.useForm();
-  // const handleResetForm = () => {
-  //   form.resetFields();
-  // };
-  // const handleFinish = (values) => {
-  //   createStaff(dispatch, values);
-  //   form.resetFields();
-  // };
+  const [form] = Form.useForm();
+  const handleResetForm = () => {
+    form.resetFields();
+  };
+  const handleFinish = (values) => {
+    createCustomer(dispatch, values);
+    form.resetFields();
+  };
   // const handleChangePage = (pagination) => {
   //   const { current, pageSize } = pagination;
   //   if (pageSize !== limit) {
@@ -33,19 +33,19 @@ const Staff = () => {
   //     getPage(dispatch, current);
   //   }
   // };
-  // const handleDelete = async (id, full_name) => {
-  //   try {
-  //     showConfirm({
-  //       title: "Delete service",
-  //       content: <p>Bạn có muốn xóa {full_name}?</p>,
-  //       onConfirm: async () => {
-  //         await deleteStaff(dispatch, id);
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error("Delete action was canceled or failed:", error);
-  //   }
-  // };
+  const handleDelete = async (id, full_name) => {
+    try {
+      showConfirm({
+        title: "Delete customer",
+        content: <p>Bạn có muốn xóa {full_name}?</p>,
+        onConfirm: async () => {
+          await deleteCustomer(dispatch, id);
+        },
+      });
+    } catch (error) {
+      console.error("Delete action was canceled or failed:", error);
+    }
+  };
   useEffect(() => {
     fetchCustomers(dispatch, page, limit);
   }, [dispatch, page, limit]);
@@ -72,7 +72,7 @@ const Staff = () => {
             text="Delete"
             danger
             icon={<DeleteOutlined />}
-            // onClick={() => handleDelete(record.id, record.full_name)}
+            onClick={() => handleDelete(record.id, record.full_name)}
           />
         </Space>
       ),
@@ -87,10 +87,10 @@ const Staff = () => {
   return (
     <div>
       <Toolbar
-        text="Staff Management"
+        text="Customer Management"
         buttons={[
           {
-            text: "Add Staff",
+            text: "Add Customer",
             type: "primary",
             onClick: () => openModal(),
             icon: <PlusOutlined />,
@@ -108,7 +108,7 @@ const Staff = () => {
             total: totalPages * limit,
             showSizeChanger: false,
           }}
-          // onTableChange={handleChangePage}
+        // onTableChange={handleChangePage}
         />
       </div>
       <div>
@@ -124,7 +124,7 @@ const Staff = () => {
           >
             <CustomForm
               form={form}
-              formConfig={staffFormConfig}
+              formConfig={customerFormConfig}
               onFinish={handleFinish}
               onReset={handleResetForm}
             />
@@ -135,4 +135,4 @@ const Staff = () => {
   );
 };
 
-export default Staff;
+export default Customer;

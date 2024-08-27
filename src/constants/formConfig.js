@@ -59,3 +59,30 @@ export const staffFormConfig = [
     },
   },
 ];
+export const customerFormConfig = [
+  {
+    label: "Full Name",
+    name: "full_name",
+    type: "input",
+    rules: [{ required: true, message: "Full name is required!" }],
+    inputProps: { placeholder: "E.g: Nguyễn Văn A" },
+  },
+  {
+    label: "Phone Number",
+    name: "phone_number",
+    type: "input",
+    rules: [
+      { required: true, message: "Phone number is required!" },
+      { max: 10, message: "Phone number is invalid!" },
+    ],
+    inputProps: { placeholder: "E.g: 0xxxxxxxxx" },
+  }, {
+    label: "Address",
+    name: "address",
+    type: "input",
+    rules: [
+      { required: true, message: "Address is required!" },
+      { max: 100, message: "Address is invalid!" },
+    ],
+  }
+]
