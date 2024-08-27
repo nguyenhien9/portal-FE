@@ -15,8 +15,8 @@ const CustomTable = ({
   }));
   return (
     <Table
-      size="small"
-      tableLayout="fixed"
+      size="large"
+      tableLayout="auto"
       columns={columns}
       dataSource={updateDataSources}
       pagination={pagination}

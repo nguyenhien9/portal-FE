@@ -1,4 +1,5 @@
-import { positions } from "./data";
+import { message } from "antd";
+import { positions, serviceNames, status } from "./data";
 
 export const serviceFormConfig = [
   {
@@ -76,7 +77,8 @@ export const customerFormConfig = [
       { max: 10, message: "Phone number is invalid!" },
     ],
     inputProps: { placeholder: "E.g: 0xxxxxxxxx" },
-  }, {
+  },
+  {
     label: "Address",
     name: "address",
     type: "input",
@@ -84,5 +86,63 @@ export const customerFormConfig = [
       { required: true, message: "Address is required!" },
       { max: 100, message: "Address is invalid!" },
     ],
-  }
-]
+  },
+];
+
+export const bookingFormConfig = [
+  {
+    label: "Customer Code",
+    name: "customer_code",
+    type: "input",
+    rules: [
+      { required: true, message: "Customer code is required!" },
+      { max: 8, message: "Customer code is invalid, must be 8 letters!" },
+    ],
+    inputProps: { placeholder: "E.g: KH42690A" },
+  },
+  {
+    label: "Staff Code",
+    name: "staff_code",
+    type: "input",
+    rules: [
+      { required: true, message: "Staff code is required!" },
+      { max: 5, message: "Staff code is invalid,must be 5 letters!" },
+    ],
+    inputProps: { placeholder: "E.g: 12929" },
+  },
+  {
+    label: "Service",
+    name: "service_name",
+    type: "select",
+    rules: [{ required: true, message: "Service is required!" }],
+    selectProps: {
+      options: serviceNames,
+      placeholder: "Select services",
+    },
+  },
+  {
+    label: "Status",
+    name: "status",
+    type: "select",
+    rules: [{ required: true, message: "Status is required!" }],
+    selectProps: {
+      options: status,
+      placeholder: "Select status",
+    },
+  },
+  {
+    label: "Notes",
+    name: "notes",
+    type: "textarea",
+  },
+  {
+    label: "Booking date",
+    name: "booking_date",
+    type: "datepicker",
+    rules: [{ required: true, message: "Booking date is required!" }],
+    datePickerProps: {
+      placeholder: "Select booking date",
+      format: "YYYY-MM-DD",
+    },
+  },
+];

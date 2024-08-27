@@ -8,18 +8,21 @@ import {
   ModalProvider,
   StaffProvider,
   CustomerProvider,
+  BookingProvider,
 } from "./contexts";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ModalProvider>
-      <CustomerProvider>
-        <StaffProvider>
-          <ServiceProvider>
-            <App />
-          </ServiceProvider>
-        </StaffProvider>
-      </CustomerProvider>
+      <BookingProvider>
+        <CustomerProvider>
+          <StaffProvider>
+            <ServiceProvider>
+              <App />
+            </ServiceProvider>
+          </StaffProvider>
+        </CustomerProvider>
+      </BookingProvider>
     </ModalProvider>
   </BrowserRouter>
 );

@@ -21,7 +21,7 @@ const customerReducer = (state, action) => {
         ...state,
         customers: action.payload.data,
         totalPages: action.payload.totalPages,
-        totalStaffs: action.payload.totalStaffs,
+        totalCustomers: action.payload.totalCustomers,
         limit: action.payload.limit,
         page: action.payload.page,
         isLoading: false,

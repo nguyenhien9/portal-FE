@@ -29,20 +29,18 @@ export const createCustomer = async (dispatch, data) => {
   try {
     const res = await axiosInstance.post("/customer", data);
     const newCustomer = res.data.data;
-    dispatch({ type: CREATE_CUSTOMERS, payload: newCustomer })
-    successHandler("Customer is created successfully!")
+    dispatch({ type: CREATE_CUSTOMERS, payload: newCustomer });
+    successHandler("Customer is created successfully!");
   } catch (error) {
-    handleError(error)
-
+    handleError(error);
   }
-}
+};
 export const deleteCustomer = async (dispatch, id) => {
   try {
-    await axiosInstance.delete(`/customer/${id}`)
-    dispatch({ type: DELETE_CUSTOMERS, payload: { id } })
-    successHandler("Delete customer successfully!")
+    await axiosInstance.delete(`/customer/${id}`);
+    dispatch({ type: DELETE_CUSTOMERS, payload: { id } });
+    successHandler("Delete customer successfully!");
   } catch (error) {
-    handleError(error)
-
+    handleError(error);
   }
-}
+};

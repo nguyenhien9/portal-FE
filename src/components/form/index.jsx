@@ -1,8 +1,9 @@
-import { Form, Space } from "antd";
+import { DatePicker, Form, Input, Space } from "antd";
 import CustomInput from "./input";
 import CustomButton from "../button";
 import CustomSelect from "./select";
 import { positions } from "../../constants/data"; // Import các options
+import TextArea from "antd/es/input/TextArea";
 
 const CustomForm = ({ formConfig, onFinish, onReset, form, initialValues }) => {
   return (
@@ -22,6 +23,12 @@ const CustomForm = ({ formConfig, onFinish, onReset, form, initialValues }) => {
               options={field.selectProps.options}
               {...field.selectProps}
             />
+          );
+        } else if (field.type === "textarea") {
+          inputComponent = <Input.TextArea rows={2} maxLength={100} />;
+        } else if (field.type === "datepicker") {
+          inputComponent = (
+            <DatePicker {...field.datePickerProps} style={{ width: "100%" }} />
           );
         }
 

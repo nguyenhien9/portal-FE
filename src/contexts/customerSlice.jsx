@@ -7,7 +7,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   totalPages: null,
-  totalStaffs: null,
+  totalCustomers: null,
   limit: null,
   page: null,
 };
